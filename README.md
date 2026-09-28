@@ -14,7 +14,7 @@
 
 ### Категории `geosite.dat`
 
-- `st-proxy` — runetfreedom `ru-blocked` + v2fly: `youtube`, `telegram`, `discord`, `openai`, `anthropic`, `category-ai-!cn`, `twitter`, `meta`, `facebook`, `instagram`, `github`, `google-play`.
+- `st-proxy` — runetfreedom `ru-blocked` + v2fly: `youtube`, `telegram`, `discord`, `openai`, `anthropic`, `category-ai-!cn`, `twitter`, `meta`, `facebook`, `instagram`, `github`, `google-play`, `spotify`.
 - `st-direct` — v2fly `private`.
 - `st-block` — v2fly `category-ads-all` + runetfreedom `win-spy` − `lists/block-allow.txt`.
 
