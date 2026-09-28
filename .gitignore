@@ -1,4 +1,6 @@
 dist/
+bin/
+geoip-src/
 prev-meta.json
 __pycache__/
 *.pyc

@@ -64,6 +64,66 @@ def encode_geoip(categories):
     return bytes(out)
 
 
+def _read_varint(buf, pos):
+    result = shift = 0
+    while True:
+        if pos >= len(buf):
+            raise ValueError(f"truncated varint at {pos}")
+        b = buf[pos]
+        pos += 1
+        result |= (b & 0x7F) << shift
+        if not b & 0x80:
+            return result, pos
+        shift += 7
+
+
+def _fields(buf):
+    pos = 0
+    while pos < len(buf):
+        key, pos = _read_varint(buf, pos)
+        field, wt = key >> 3, key & 7
+        if wt == 0:
+            val, pos = _read_varint(buf, pos)
+        elif wt == 2:
+            ln, pos = _read_varint(buf, pos)
+            if pos + ln > len(buf):
+                raise ValueError(f"length overruns buffer at {pos}")
+            val, pos = buf[pos:pos + ln], pos + ln
+        else:
+            raise ValueError(f"unexpected wire type {wt} at {pos}")
+        yield field, wt, val
+
+
+def decode_geoip_counts(buf):
+    """Strictly decode a geoip.dat -> {lowercase code: number of CIDRs}; raises ValueError."""
+    counts = {}
+    for f, wt, entry in _fields(buf):
+        if (f, wt) != (1, 2):
+            raise ValueError(f"GeoIPList: unexpected field {f}/{wt}")
+        code, n = None, 0
+        for g, gwt, gv in _fields(entry):
+            if (g, gwt) == (1, 2):
+                code = gv.decode("utf-8")
+            elif (g, gwt) == (2, 2):
+                ip = prefix = None
+                for c, cwt, cv in _fields(gv):
+                    if (c, cwt) == (1, 2):
+                        ip = cv
+                    elif (c, cwt) == (2, 0):
+                        prefix = cv
+                    else:
+                        raise ValueError(f"CIDR: unexpected field {c}/{cwt}")
+                if ip is None or len(ip) not in (4, 16) or (prefix or 0) > len(ip) * 8:
+                    raise ValueError(f"{code}: bad CIDR")
+                n += 1
+            elif (g, gwt) != (3, 0):
+                raise ValueError(f"GeoIP: unexpected field {g}/{gwt}")
+        if not code:
+            raise ValueError("GeoIP without country_code")
+        counts[code.lower()] = n
+    return counts
+
+
 def parse_rule(rule):
     """'domain:x' / 'full:x' / 'keyword:x' / 'regexp:x' / bare 'x' (= domain) -> (type, value)"""
     rtype, value = "domain", rule

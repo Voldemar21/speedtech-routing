@@ -21,7 +21,8 @@
     "st-proxy": 50000,
     "st-direct": 1,
     "st-block": 1000,
-    "geoip:st-telegram": 5
+    "geoip:st-telegram": 5,
+    "geoip:private": 5
   },
   "subtract_direct_from_proxy": false,
   "data_release_min_interval_days": 7,

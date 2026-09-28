@@ -100,15 +100,36 @@ def build_geosite(cfg, lists):
 
 
 def build_geoip(cfg):
+    """Fallback for local runs without Go: our own encoder."""
     return {
         "st-telegram": geodat.parse_cidrs(fetch(cfg["telegram_cidr"]).decode("utf-8")),
         "private": [ipaddress.ip_network(c) for c in PRIVATE_CIDRS],
     }
 
 
-def check_counts(cfg, geosite, geoip):
+def prepare_geoip(cfg, src_dir):
+    """Write text sources + config.json for the official v2fly/geoip tool (CI uses this)."""
+    src = Path(src_dir)
+    src.mkdir(parents=True, exist_ok=True)
+    nets = geodat.parse_cidrs(fetch(cfg["telegram_cidr"]).decode("utf-8"))
+    (src / "st-telegram.txt").write_text("".join(f"{n}\n" for n in nets), encoding="utf-8")
+    config = {
+        "input": [
+            {"type": "text", "action": "add", "args": {"name": "st-telegram", "uri": "./st-telegram.txt"}},
+            {"type": "private", "action": "add"},
+        ],
+        "output": [
+            {"type": "v2rayGeoIPDat", "action": "output",
+             "args": {"outputDir": "./output", "outputName": "geoip.dat", "wantedList": ["st-telegram", "private"]}},
+        ],
+    }
+    (src / "config.json").write_text(json.dumps(config, indent=2) + "\n", encoding="utf-8")
+    log(f"prepared {src}/st-telegram.txt ({len(nets)} CIDRs) and {src}/config.json")
+
+
+def check_counts(cfg, geosite, geoip_counts):
     counts = {code: len(r) for code, r in geosite.items()}
-    counts.update({f"geoip:{code}": len(n) for code, n in geoip.items()})
+    counts.update({f"geoip:{code}": n for code, n in geoip_counts.items()})
     for key, minimum in cfg["min_counts"].items():
         if counts.get(key, 0) < minimum:
             sys.exit(f"sanity check failed: {key} has {counts.get(key, 0)} entries, expected >= {minimum}")
@@ -152,9 +173,14 @@ def main():
     ap.add_argument("--prev", help="meta.json of the previous release (missing/empty = first release)")
     ap.add_argument("--repo", default="Voldemar21/speedtech-routing")
     ap.add_argument("--force", action="store_true")
+    ap.add_argument("--prepare-geoip", metavar="DIR", help="only write v2fly/geoip sources + config to DIR and exit")
+    ap.add_argument("--geoip-dat", metavar="FILE", help="use geoip.dat built by v2fly/geoip instead of the built-in encoder")
     args = ap.parse_args()
 
     cfg = json.loads((HERE / "sources.json").read_text(encoding="utf-8"))
+    if args.prepare_geoip:
+        prepare_geoip(cfg, args.prepare_geoip)
+        return
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     prev = {}
@@ -166,13 +192,20 @@ def main():
 
     log("building geosite...")
     geosite = build_geosite(cfg, lists)
-    log("building geoip...")
-    geoip = build_geoip(cfg)
-    counts = check_counts(cfg, geosite, geoip)
+    if args.geoip_dat:
+        log(f"using geoip from {args.geoip_dat} (v2fly/geoip)")
+        geoip_dat = Path(args.geoip_dat).read_bytes()
+    else:
+        log("building geoip with the built-in encoder...")
+        geoip_dat = geodat.encode_geoip(build_geoip(cfg))
+    try:
+        geoip_counts = geodat.decode_geoip_counts(geoip_dat)
+    except ValueError as e:
+        sys.exit(f"geoip.dat failed strict decoding: {e}")
+    counts = check_counts(cfg, geosite, geoip_counts)
     log("counts: " + json.dumps(counts))
 
     geosite_dat = geodat.encode_geosite(geosite)
-    geoip_dat = geodat.encode_geoip(geoip)
     (out / "geosite.dat").write_bytes(geosite_dat)
     (out / "geoip.dat").write_bytes(geoip_dat)
     for name, data in (("geosite.dat", geosite_dat), ("geoip.dat", geoip_dat)):
