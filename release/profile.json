@@ -1,0 +1,56 @@
+{
+  "Name": "SpeedTech",
+  "GlobalProxy": "false",
+  "UseChunkFiles": "true",
+  "RemoteDNSType": "DoH",
+  "RemoteDNSDomain": "https://8.8.8.8/dns-query",
+  "RemoteDNSIP": "8.8.8.8",
+  "DomesticDNSType": "DoH",
+  "DomesticDNSDomain": "https://77.88.8.8/dns-query",
+  "DomesticDNSIP": "77.88.8.8",
+  "Geoipurl": "https://cdn.jsdelivr.net/gh/Voldemar21/speedtech-routing@r202609282317/release/geoip.dat",
+  "Geositeurl": "https://cdn.jsdelivr.net/gh/Voldemar21/speedtech-routing@r202609282317/release/geosite.dat",
+  "LastUpdated": "1790637421",
+  "DnsHosts": {},
+  "RouteOrder": "block-direct-proxy",
+  "BlockSites": [
+    "geosite:st-block"
+  ],
+  "BlockIp": [],
+  "DirectSites": [
+    "geosite:st-direct",
+    "domain:ifconfig.me"
+  ],
+  "DirectIp": [
+    "geoip:private"
+  ],
+  "ProxySites": [
+    "geosite:st-proxy",
+    "domain:anthropic.com",
+    "domain:bungie.net",
+    "domain:chatgpt.com",
+    "domain:claude.ai",
+    "domain:claude.com",
+    "domain:claudeusercontent.com",
+    "domain:deadorbit.net",
+    "domain:discord.com",
+    "domain:discord.gg",
+    "domain:discord.media",
+    "domain:discordapp.com",
+    "domain:discordapp.net",
+    "domain:emochi.com",
+    "domain:flowgpt.com",
+    "domain:gravityshavings.net",
+    "domain:ifconfig.me",
+    "domain:ipinfo.io",
+    "domain:oaistatic.com",
+    "domain:oaiusercontent.com",
+    "domain:openai.com",
+    "domain:steamserver.net"
+  ],
+  "ProxyIp": [
+    "geoip:st-telegram"
+  ],
+  "DomainStrategy": "IPIfNonMatch",
+  "FakeDNS": "false"
+}

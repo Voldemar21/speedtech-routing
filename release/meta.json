@@ -1,0 +1,22 @@
+{
+  "tag": "r202609282317",
+  "last_updated": 1790637421,
+  "built_at": 1790637421,
+  "reason": "first release",
+  "geosite_sha256": "446f31cbba69432bd4eb9d2b6ee33d03c9e2a47eac745478c61428144e852456",
+  "geoip_sha256": "e87a9012bd45651e10542690a10093d3cb4701e04d23041a30c2bb405cb972c6",
+  "profile_core_sha256": "20fa4cda1c018068ab389bc832b804ea6b0459e3bb064040c31300bba4dfa2bf",
+  "counts": {
+    "st-proxy": 75723,
+    "st-direct": 131,
+    "st-block": 1257,
+    "geoip:st-telegram": 14,
+    "geoip:private": 21
+  },
+  "sizes": {
+    "geosite.dat": 1638716,
+    "geoip.dat": 500,
+    "profile.json": 1266,
+    "deeplink.txt": 1709
+  }
+}
