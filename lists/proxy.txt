@@ -1,0 +1,32 @@
+# Через VPN. Синтаксис v2fly/Xray: domain: (домен и поддомены, по умолчанию), full:, keyword:, regexp:.
+# Эти строки встраиваются прямо в профиль Happ и доходят до пользователей со следующим обновлением подписки.
+
+# Destiny 2 / Bungie / Steam
+deadorbit.net
+gravityshavings.net
+steamserver.net
+bungie.net
+
+# Claude / Anthropic
+claude.ai
+claude.com
+anthropic.com
+claudeusercontent.com
+
+# ChatGPT / OpenAI
+openai.com
+chatgpt.com
+oaistatic.com
+oaiusercontent.com
+
+# Discord
+discord.com
+discord.gg
+discordapp.com
+discordapp.net
+discord.media
+
+# TEST (шаг 3, проверка RouteOrder): ifconfig.me есть и здесь, и в direct.txt — должен показать домашний IP.
+# ipinfo.io только здесь — должен показать IP VPN. Удалить после проверки.
+ifconfig.me
+ipinfo.io

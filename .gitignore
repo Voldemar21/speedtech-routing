@@ -1,0 +1,4 @@
+dist/
+prev-meta.json
+__pycache__/
+*.pyc

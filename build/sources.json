@@ -1,0 +1,30 @@
+{
+  "v2fly_tarball": "https://codeload.github.com/v2fly/domain-list-community/tar.gz/refs/heads/master",
+  "runetfreedom_base": "https://raw.githubusercontent.com/runetfreedom/russia-blocked-geosite/release/",
+  "telegram_cidr": "https://core.telegram.org/resources/cidr.txt",
+  "geosite": {
+    "st-proxy": {
+      "runetfreedom": ["ru-blocked"],
+      "v2fly": ["youtube", "telegram", "discord", "openai", "anthropic", "category-ai-!cn",
+                "twitter", "meta", "facebook", "instagram", "github", "google-play"]
+    },
+    "st-direct": {
+      "v2fly": ["private"]
+    },
+    "st-block": {
+      "v2fly": ["category-ads-all"],
+      "runetfreedom": ["win-spy"],
+      "exclude_list": "block-allow"
+    }
+  },
+  "min_counts": {
+    "st-proxy": 50000,
+    "st-direct": 1,
+    "st-block": 1000,
+    "geoip:st-telegram": 5
+  },
+  "subtract_direct_from_proxy": false,
+  "data_release_min_interval_days": 7,
+  "max_deeplink_bytes": 3072,
+  "file_base_url": "https://cdn.jsdelivr.net/gh/{repo}@{tag}/release/"
+}
