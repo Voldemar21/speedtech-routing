@@ -8,9 +8,9 @@
   "DomesticDNSType": "DoH",
   "DomesticDNSDomain": "https://77.88.8.8/dns-query",
   "DomesticDNSIP": "77.88.8.8",
-  "Geoipurl": "https://cdn.jsdelivr.net/gh/Voldemar21/speedtech-routing@r202609282330/release/geoip.dat",
-  "Geositeurl": "https://cdn.jsdelivr.net/gh/Voldemar21/speedtech-routing@r202609282330/release/geosite.dat",
-  "LastUpdated": "1790638241",
+  "Geoipurl": "https://cdn.jsdelivr.net/gh/Voldemar21/speedtech-routing@r202609292111/release/geoip.dat",
+  "Geositeurl": "https://cdn.jsdelivr.net/gh/Voldemar21/speedtech-routing@r202609292111/release/geosite.dat",
+  "LastUpdated": "1790716299",
   "DnsHosts": {},
   "RouteOrder": "block-direct-proxy",
   "BlockSites": [
@@ -21,9 +21,7 @@
     "geosite:st-direct",
     "domain:ifconfig.me"
   ],
-  "DirectIp": [
-    "geoip:private"
-  ],
+  "DirectIp": [],
   "ProxySites": [
     "geosite:st-proxy",
     "domain:anthropic.com",
@@ -49,7 +47,7 @@
     "domain:steamserver.net"
   ],
   "ProxyIp": [
-    "geoip:st-telegram"
+    "geoip:telegram"
   ],
   "DomainStrategy": "IPIfNonMatch",
   "FakeDNS": "false"

@@ -1,22 +1,30 @@
 {
-  "tag": "r202609282330",
-  "last_updated": 1790638241,
-  "built_at": 1790638241,
-  "reason": "forced",
-  "geosite_sha256": "446f31cbba69432bd4eb9d2b6ee33d03c9e2a47eac745478c61428144e852456",
-  "geoip_sha256": "95848f3416fe6297b983fcfb56c44872f0b4a22c80064d7aa999f72a4c2ea5fd",
-  "profile_core_sha256": "20fa4cda1c018068ab389bc832b804ea6b0459e3bb064040c31300bba4dfa2bf",
+  "tag": "r202609292111",
+  "last_updated": 1790716299,
+  "built_at": 1790716299,
+  "reason": "lists/template changed",
+  "geosite_sha256": "0a692712853941980d3719df4ce6bea1f5c5c2f0070af80c61f9c7748bb93f2a",
+  "geoip_sha256": "8120b68ed74e07bea63f357bfa5cb434d9acc0577f69799260075374b1a6f756",
+  "profile_core_sha256": "4f321789204e0491fe16f7e57aac0ac07f34f4686e09e180fcc596a1fdd7590c",
   "counts": {
-    "st-proxy": 75723,
+    "st-proxy": 75729,
     "st-direct": 131,
     "st-block": 1257,
-    "geoip:private": 18,
-    "geoip:st-telegram": 11
+    "geoip:cloudflare": 706,
+    "geoip:cloudfront": 211,
+    "geoip:ddos-guard": 19,
+    "geoip:facebook": 120,
+    "geoip:fastly": 90,
+    "geoip:google": 8403,
+    "geoip:netflix": 120,
+    "geoip:telegram": 12,
+    "geoip:twitter": 19,
+    "geoip:yandex": 60
   },
   "sizes": {
-    "geosite.dat": 1638716,
-    "geoip.dat": 414,
-    "profile.json": 1266,
-    "deeplink.txt": 1709
+    "geosite.dat": 1638875,
+    "geoip.dat": 164905,
+    "profile.json": 1248,
+    "deeplink.txt": 1685
   }
 }
