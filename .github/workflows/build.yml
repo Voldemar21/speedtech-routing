@@ -72,3 +72,24 @@ jobs:
           git -C rel tag "$TAG"
           git -C rel push origin release "$TAG"
           gh release create "$TAG" dist/* --title "$TAG" --notes "$REASON"
+
+      # Happ gives up on a geo file after ~30 s; the first request for a new tag on jsDelivr
+      # is a cold fetch from GitHub and can be slower. Warm the CDN before anyone else asks.
+      - name: Warm jsDelivr cache
+        if: steps.build.outputs.release == 'true'
+        env:
+          TAG: ${{ steps.build.outputs.tag }}
+        run: |
+          base="https://cdn.jsdelivr.net/gh/${{ github.repository }}@${TAG}/release"
+          for f in geosite.dat geoip.dat; do
+            ok=0
+            for i in $(seq 1 20); do
+              res=$(curl -s -o "/tmp/$f" -w '%{http_code} %{time_total}' --max-time 120 "$base/$f" || echo "000 0")
+              if [ "${res%% *}" = 200 ] && cmp -s "/tmp/$f" "dist/$f"; then
+                echo "$f is on jsDelivr (attempt $i, ${res#* }s)"; ok=1; break
+              fi
+              echo "$f: HTTP ${res%% *}, content mismatch or not ready (attempt $i), retry in 15s"
+              sleep 15
+            done
+            [ "$ok" = 1 ] || { echo "::error::$f is not available on jsDelivr for $TAG"; exit 1; }
+          done
