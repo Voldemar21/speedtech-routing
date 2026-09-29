@@ -29,8 +29,3 @@ discord.media
 # Emochi (делает FlowGPT)
 emochi.com
 flowgpt.com
-
-# TEST (шаг 3, проверка RouteOrder): ifconfig.me есть и здесь, и в direct.txt — должен показать домашний IP.
-# ipinfo.io только здесь — должен показать IP VPN. Удалить после проверки.
-ifconfig.me
-ipinfo.io
