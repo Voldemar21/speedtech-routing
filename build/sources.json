@@ -2,6 +2,7 @@
   "v2fly_tarball": "https://codeload.github.com/v2fly/domain-list-community/tar.gz/refs/heads/master",
   "runetfreedom_base": "https://raw.githubusercontent.com/runetfreedom/russia-blocked-geosite/release/",
   "telegram_cidr": "https://core.telegram.org/resources/cidr.txt",
+  "geoip_copy_url": "https://raw.githubusercontent.com/runetfreedom/russia-blocked-geoip/release/geoip-asn.dat",
   "geosite": {
     "st-proxy": {
       "runetfreedom": ["ru-blocked"],
@@ -21,8 +22,7 @@
     "st-proxy": 50000,
     "st-direct": 1,
     "st-block": 1000,
-    "geoip:st-telegram": 5,
-    "geoip:private": 5
+    "geoip:telegram": 5
   },
   "subtract_direct_from_proxy": false,
   "data_release_min_interval_days": 7,

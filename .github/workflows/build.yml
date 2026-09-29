@@ -35,25 +35,11 @@ jobs:
           curl -fsSL "https://raw.githubusercontent.com/${{ github.repository }}/release/release/meta.json" -o prev-meta.json \
             || : > prev-meta.json
 
-      - uses: actions/setup-go@v5
-        with:
-          go-version: "1.26"
-          cache: false
-
-      - name: Install v2fly/geoip
-        run: GOBIN="$PWD/bin" go install github.com/v2fly/geoip@latest
-
-      - name: Build geoip.dat with v2fly/geoip
-        run: |
-          python build/build.py --prepare-geoip geoip-src
-          cd geoip-src && ../bin/geoip -c config.json
-          ls -l output/
-
       - name: Build
         id: build
         run: |
           python build/build.py --out dist --prev prev-meta.json --repo "${{ github.repository }}" \
-            --geoip-dat geoip-src/output/geoip.dat ${{ inputs.force && '--force' || '' }}
+            ${{ inputs.force && '--force' || '' }}
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4

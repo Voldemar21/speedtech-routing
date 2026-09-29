@@ -18,10 +18,15 @@
 - `st-direct` — v2fly `private`.
 - `st-block` — v2fly `category-ads-all` + runetfreedom `win-spy` − `lists/block-allow.txt`.
 
-### Категории `geoip.dat`
+### `geoip.dat`
 
-- `st-telegram` — [официальный список подсетей Telegram](https://core.telegram.org/resources/cidr.txt) (нужен для звонков).
-- `private` — локальные и служебные сети.
+Копия [runetfreedom `geoip-asn.dat`](https://github.com/runetfreedom/russia-blocked-geoip) (~165 КБ), кладётся в наш релиз.
+В профиле используется только `geoip:telegram` (нужен для звонков Telegram). Локальные сети отдельно не нужны:
+при `GlobalProxy: false` всё, что не попало в правила, и так идёт напрямую.
+
+Свой маленький geoip (сотни байт) Happ не принимает — проверка геофайлов отвергает его как invalid,
+поэтому используем готовый файл нормального размера. Режимы `--prepare-geoip` / `--geoip-dat` в `build.py`
+оставлены для сборки через [v2fly/geoip](https://github.com/v2fly/geoip), если понадобится свой набор подсетей.
 
 ## Как добавить домен
 

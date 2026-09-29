@@ -193,8 +193,13 @@ def main():
     log("building geosite...")
     geosite = build_geosite(cfg, lists)
     if args.geoip_dat:
-        log(f"using geoip from {args.geoip_dat} (v2fly/geoip)")
+        log(f"using geoip from {args.geoip_dat}")
         geoip_dat = Path(args.geoip_dat).read_bytes()
+    elif cfg.get("geoip_copy_url"):
+        # Happ rejects tiny geoip.dat files (500 B hand-encoded and 414 B from v2fly/geoip both
+        # failed its validation), so we ship a copy of a ready-made ~165 KB file instead.
+        log("copying ready-made geoip.dat...")
+        geoip_dat = fetch(cfg["geoip_copy_url"])
     else:
         log("building geoip with the built-in encoder...")
         geoip_dat = geodat.encode_geoip(build_geoip(cfg))

@@ -16,9 +16,9 @@
   "BlockSites": ["geosite:st-block"],
   "BlockIp": [],
   "DirectSites": ["geosite:st-direct"],
-  "DirectIp": ["geoip:private"],
+  "DirectIp": [],
   "ProxySites": ["geosite:st-proxy"],
-  "ProxyIp": ["geoip:st-telegram"],
+  "ProxyIp": ["geoip:telegram"],
   "DomainStrategy": "IPIfNonMatch",
   "FakeDNS": "false"
 }
