@@ -8,9 +8,9 @@
   "DomesticDNSType": "DoH",
   "DomesticDNSDomain": "https://77.88.8.8/dns-query",
   "DomesticDNSIP": "77.88.8.8",
-  "Geoipurl": "https://cdn.jsdelivr.net/gh/Voldemar21/speedtech-routing@r202609292111/release/geoip.dat",
-  "Geositeurl": "https://cdn.jsdelivr.net/gh/Voldemar21/speedtech-routing@r202609292111/release/geosite.dat",
-  "LastUpdated": "1790716299",
+  "Geoipurl": "https://cdn.jsdelivr.net/gh/Voldemar21/speedtech-routing@r202609292157/release/geoip.dat",
+  "Geositeurl": "https://cdn.jsdelivr.net/gh/Voldemar21/speedtech-routing@r202609292157/release/geosite.dat",
+  "LastUpdated": "1790719040",
   "DnsHosts": {},
   "RouteOrder": "block-direct-proxy",
   "BlockSites": [
@@ -18,8 +18,7 @@
   ],
   "BlockIp": [],
   "DirectSites": [
-    "geosite:st-direct",
-    "domain:ifconfig.me"
+    "geosite:st-direct"
   ],
   "DirectIp": [],
   "ProxySites": [
@@ -39,8 +38,6 @@
     "domain:emochi.com",
     "domain:flowgpt.com",
     "domain:gravityshavings.net",
-    "domain:ifconfig.me",
-    "domain:ipinfo.io",
     "domain:oaistatic.com",
     "domain:oaiusercontent.com",
     "domain:openai.com",

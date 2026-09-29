@@ -1,11 +1,11 @@
 {
-  "tag": "r202609292111",
-  "last_updated": 1790716299,
-  "built_at": 1790716299,
+  "tag": "r202609292157",
+  "last_updated": 1790719040,
+  "built_at": 1790719040,
   "reason": "lists/template changed",
   "geosite_sha256": "0a692712853941980d3719df4ce6bea1f5c5c2f0070af80c61f9c7748bb93f2a",
   "geoip_sha256": "8120b68ed74e07bea63f357bfa5cb434d9acc0577f69799260075374b1a6f756",
-  "profile_core_sha256": "4f321789204e0491fe16f7e57aac0ac07f34f4686e09e180fcc596a1fdd7590c",
+  "profile_core_sha256": "e117105ed0fd5da2b3c67a5f1264c78d16f2d9223b48bb9719f76a7f9fb708db",
   "counts": {
     "st-proxy": 75729,
     "st-direct": 131,
@@ -24,7 +24,7 @@
   "sizes": {
     "geosite.dat": 1638875,
     "geoip.dat": 164905,
-    "profile.json": 1248,
-    "deeplink.txt": 1685
+    "profile.json": 1187,
+    "deeplink.txt": 1605
   }
 }
